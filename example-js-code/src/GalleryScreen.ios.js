@@ -1,5 +1,5 @@
 import _ from 'lodash';
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import {
   StyleSheet,
   View,
@@ -8,9 +8,9 @@ import {
   Dimensions
 } from 'react-native';
 
-import {CameraKitGallery, CameraKitGalleryView} from '../../src';
+import { CameraKitGallery, CameraKitGalleryView } from '../../src';
 
-const {width, height} = Dimensions.get('window');
+const { width, height } = Dimensions.get('window');
 const size = Math.floor((Dimensions.get('window').width) / 3);
 
 export default class GalleryScreen extends Component {
@@ -30,25 +30,25 @@ export default class GalleryScreen extends Component {
     const image = await CameraKitGallery.getImageForTapEvent(event.nativeEvent);
 
     if (!isSelected || _.get(image, 'selectedImageId') === _.get(this.state, 'presentedImage.selectedImageId')) {
-      this.setState({presentedImage: undefined, showPresentedImage: false});
+      this.setState({ presentedImage: undefined, showPresentedImage: false });
     } else if (image) {
-      this.setState({presentedImage: image, showPresentedImage: true});
+      this.setState({ presentedImage: image, showPresentedImage: true });
     }
   }
 
   renderPresentedImage() {
     return (
-      <View style={{position: 'absolute', width, height, backgroundColor: 'green'}}>
+      <View style={{ position: 'absolute', width, height, backgroundColor: 'green' }}>
         <View style={styles.container}>
           <Image
-            resizeMode={Image.resizeMode.cover}
-            style={{width: 300, height: 300}}
-            source={{uri: this.state.presentedImage.imageUri}}
+            resizeMode={'cover'}
+            style={{ width: 300, height: 300 }}
+            source={{ uri: this.state.presentedImage.imageUri }}
           />
 
           <Button
             title={'Back'}
-            onPress={() => this.setState({showPresentedImage: false})}
+            onPress={() => this.setState({ showPresentedImage: false })}
           />
         </View>
       </View>
@@ -58,9 +58,9 @@ export default class GalleryScreen extends Component {
   render() {
 
     return (
-      <View style={{flex: 1}}>
+      <View style={{ flex: 1 }}>
         <CameraKitGalleryView
-          style={{flex:1, margin: 0, marginTop: 50}}
+          style={{ flex: 1, margin: 0, marginTop: 50 }}
           albumName={this.state.album}
           minimumInteritemSpacing={10}
           minimumLineSpacing={10}
